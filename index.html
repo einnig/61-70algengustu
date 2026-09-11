@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="is">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Æfing 61 - 70 algengustu orðin í íslenskum námsbókum</title>
+    <style>
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            text-align: center; 
+            background-color: #f0f4f8; 
+            margin: 0;
+            padding: 2vh 5vw; 
+            min-height: 95vh; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-sizing: border-box;
+        }
+        .container { 
+            width: 100%; 
+            max-width: 1200px; 
+            background: white; 
+            padding: 30px 40px; 
+            border-radius: 20px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1); 
+            max-height: 100%;
+            overflow-y: auto;
+        }
+        h1 {
+            color: #1a73e8;
+            font-size: 2em;
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+        /* Framvindustika */
+        .progress-container {
+            width: 100%;
+            background-color: #e0e0e0;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            height: 20px;
+        }
+        #progress-bar {
+            height: 100%;
+            width: 0%;
+            background-color: #34a853;
+            border-radius: 10px;
+            transition: width 0.5s ease-in-out;
+        }
+        
+        #target { 
+            font-size: 4em; 
+            margin: 10px 0; 
+            color: #222; 
+            font-weight: bold;
+        }
+        
+        #is-explanation {
+            font-size: 1.3em;
+            color: #333;
+            background-color: #e8f0fe;
+            padding: 15px 25px;
+            border-radius: 10px;
+            display: inline-block;
+            margin-bottom: 20px;
+            max-width: 80%;
+            line-height: 1.6;
+        }
+
+        .btn { 
+            padding: 12px 25px; 
+            font-size: 1.2em; 
+            margin: 5px; 
+            cursor: pointer; 
+            border: none; 
+            border-radius: 8px; 
+            background-color: #1a73e8; 
+            color: white; 
+            transition: 0.3s; 
+            font-weight: bold;
+        }
+        .btn:hover:not(:disabled) { background-color: #1557b0; transform: scale(1.02); }
+        .recording { background-color: #d93025; animation: pulse 1.5s infinite; }
+        .recording:hover { background-color: #b3140b; }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        #media-box { 
+            font-size: 1.1em; 
+            color: #444; 
+            text-align: left; 
+            background: #f8fbff; 
+            padding: 15px 30px; 
+            border-radius: 12px; 
+            line-height: 1.8; 
+            border-left: 6px solid #1a73e8; 
+            margin-top: 15px;
+            display: inline-block;
+            min-width: 60%;
+        }
+        #spoken {
+            margin-top: 15px; 
+            font-size: 1.4em;
+            font-style: italic; 
+            color: #555;
+        }
+        #result {
+            font-weight: bold; 
+            font-size: 1.8em; 
+            margin-top: 5px; 
+            color: #1a73e8;
+        }
+        .nav-btns { margin-top: 20px; }
+        #counter { font-size: 1.2em; color: #666; font-weight: bold; margin-bottom: 10px; }
+        
+        /* Fyrir nafnainnslátt */
+        #studentName {
+            font-size: 1.5em;
+            padding: 10px;
+            margin: 20px 0;
+            width: 80%;
+            max-width: 400px;
+            border: 2px solid #1a73e8;
+            border-radius: 8px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container" id="app">
+    <h1>Æfing 61 - 70 algengustu orðin í íslenskum námsbókum</h1>
+    
+    <div class="progress-container">
+        <div id="progress-bar"></div>
+    </div>
+
+    <div id="counter"></div>
+    
+    <div id="target"></div>
+    <div id="is-explanation"></div>
+    <br>
+    <button id="record-btn" class="btn" onclick="toggleRecord()">🎤 Tala</button>
+    
+    <div id="spoken"></div>
+    <div id="result"></div>
+
+    <div id="media-box"></div>
+
+    <div class="nav-btns">
+        <button class="btn" style="background-color: #5f6368;" onclick="prevExercise()">⬅️ Fyrri</button>
+        <button class="btn" style="background-color: #5f6368;" onclick="nextExercise()">Næsta ➡️</button>
+    </div>
+</div>
+
+<script>
+const exerciseData = [
+    { 
+        text: "vel", 
+        is_exp: "<b>Útskýring:</b> Atviksorð sem þýðir að gera eitthvað á góðan eða réttan hátt.<br><b>Dæmi:</b> Hann spilar mjög <b>vel</b>.",
+        translations: "<b>Enska (English):</b> Explanation: Adverb meaning 'well' or 'good'. Example: He plays very <b>well</b>.<br>" +
+                      "<b>Pólska (Polski):</b> Objaśnienie: Przysłówek oznaczający 'dobrze'. Przykład: On gra bardzo <b>dobrze</b>.<br>" +
+                      "<b>Spænska (Español):</b> Explicación: Adverbio que significa 'bien'. Ejemplo: Él juega muy <b>bien</b>.<br>" +
+                      "<b>Víetnamska (Tiếng Việt):</b> Giải thích: Trạng từ nghĩa là 'tốt' hoặc 'hay'. Ví dụ: Anh ấy chơi rất <b>hay</b>.<br>" +
+                      "<b>Arabíska (العربية):</b> الشرح: ظرف بمعنى 'جيداً' أو 'بشكل جيد'. مثال: هو يلعب بشكل <b>جيد</b> جداً.<br>" +
+                      "<b>Rússneska (Русский):</b> Объяснение: Наречие, означающее 'хорошо'. Пример: Он играет очень <b>хорошо</b>.<br>" +
+                      "<b>Úkraínska (Українська):</b> Пояснення: Прислівник, що означає 'добре'. Приклад: Він грає дуже <b>добре</b>.<br>" +
+                      "<b>Persneska (فارسی):</b> توضیح: قید به معنی «خوب». مثال: او خیلی <b>خوب</b> بازی می‌کند."
+    },
+    { 
+        text: "hvaða", 
+        is_exp: "<b>Útskýring:</b> Spurnarfornafn sem er notað til að spyrja um tegund eða val.<br><b>Dæmi:</b> <b>Hvaða</b> litur er þetta?",
+        translations: "<b>Enska (English):</b> Explanation: Question word meaning 'what' or 'which'. Example: <b>What</b> color is this?<br>" +
+                      "<b>Pólska (Polski):</b> Objaśnienie: Zaimek pytający oznaczający 'jaki' lub 'który'. Przykład: <b>Jaki</b> to kolor?<br>" +
+                      "<b>Spænska (Español):</b> Explicación: Pronombre interrogativo que significa 'qué' o 'cuál'. Ejemplo: ¿<b>Qué</b> color es este?<br>" +
+                      "<b>Víetnamska (Tiếng Việt):</b> Giải thích: Từ để hỏi nghĩa là 'nào' hoặc 'gì'. Ví dụ: Đây là màu <b>gì</b>?<br>" +
+                      "<b>Arabíska (العربية):</b> الشرح: أداة استفهام تعني 'أي' أو 'ماذا'. مثال: <b>أي</b> لون هذا؟<br>" +
+                      "<b>Rússneska (Русский):</b> Объяснение: Вопросительное местоимение, означающее 'какой'. Пример: <b>Какой</b> это цвет?<br>" +
+                      "<b>Úkraínska (Українська):</b> Пояснення: Питальний займенник, що означає 'який'. Приклад: <b>Який</b> це колір?<br>" +
+                      "<b>Persneska (فارسی):</b> توضیح: کلمه پرسشی به معنی «کدام» یا «چه». مثال: این <b>چه</b> رنگی است؟"
+    },
+    { 
+        text: "inn", 
+        is_exp: "<b>Útskýring:</b> Atviksorð sem vísar til hreyfingar eða stefnu inn í eitthvað rými.<br><b>Dæmi:</b> Komdu <b>inn</b> í húsið.",
+        translations: "<b>Enska (English):</b> Explanation: Adverb indicating movement 'in' or 'inside'. Example: Come <b>inside</b> the house.<br>" +
+                      "<b>Pólska (Polski):</b> Objaśnienie: Przysłówek wskazujący ruch do środka (w/do). Przykład: Chodź <b>do</b> domu (do środka).<br>" +
+                      "<b>Spænska (Español):</b> Explicación: Adverbio que indica movimiento hacia adentro. Ejemplo: Entra (ven <b>adentro</b>) a la casa.<br>" +
+                      "<b>Víetnamska (Tiếng Việt):</b> Giải thích: Trạng từ chỉ sự di chuyển 'vào trong'. Ví dụ: Hãy vào <b>trong</b> nhà.<br>" +
+                      "<b>Arabíska (العربية):</b> الشرح: ظرف يشير إلى الحركة إلى الداخل. مثال: تعال إلى <b>داخل</b> المنزل.<br>" +
+                      "<b>Rússneska (Русский):</b> Объяснение: Наречие, указывающее на движение 'внутрь'. Пример: Заходи <b>внутрь</b> (в дом).<br>" +
+                      "<b>Úkraínska (Українська):</b> Пояснення: Прислівник, що вказує на рух 'всередину'. Приклад: Заходь <b>всередину</b> (в будинок).<br>" +
+                      "<b>Persneska (فارسی):</b> توضیح: قید که به معنی حرکت به سمت «داخل» است. مثال: بیا <b>داخل</b> خانه."
+    },
+    { 
+        text: "árið", 
+        is_exp: "<b>Útskýring:</b> Nafnorðið „ár“ með ákveðnum greini. Oft notað þegar talað er um ákveðið ártal.<br><b>Dæmi:</b> Hún fæddist <b>árið</b> 2010.",
+        translations: "<b>Enska (English):</b> Explanation: Noun 'year' with the definite article (the year). Example: She was born in <b>the year</b> 2010.<br>" +
+                      "<b>Pólska (Polski):</b> Objaśnienie: Rzeczownik 'rok' z przedimkiem określonym (w roku). Przykład: Urodziła się w <b>roku</b> 2010.<br>" +
+                      "<b>Spænska (Español):</b> Explicación: Sustantivo 'año' con artículo definido (el año). Ejemplo: Ella nació en <b>el año</b> 2010.<br>" +
+                      "<b>Víetnamska (Tiếng Việt):</b> Giải thích: Danh từ 'năm' với mạo từ xác định. Ví dụ: Cô ấy sinh <b>năm</b> 2010.<br>" +
+                      "<b>Arabíska (العربية):</b> الشرح: اسم 'سنة' أو 'عام' مع أداة التعريف. مثال: هي ولدت في <b>عام</b> 2010.<br>" +
+                      "<b>Rússneska (Русский):</b> Объяснение: Существительное 'год' с определенным артиклем (в году). Пример: Она родилась в 2010 <b>году</b>.<br>" +
+                      "<b>Úkraínska (Українська):</b> Пояснення: Іменник 'рік' з означеним артиклем (у році). Приклад: Вона народилася у 2010 <b>році</b>.<br>" +
+                      "<b>Persneska (فارسی):</b> توضیح: اسم «سال» با حرف تعریف معین (در سالِ). مثال: او در <b>سال</b> ۲۰۱۰ به دنیا آمد."
+    },
+    { 
+        text: "honum", 
+        is_exp: "<b>Útskýring:</b> Fornafnið „hann“ í þágufalli. Oft notað eftir sagnorðum eins og „að hjálpa“ eða forsetningum.<br><b>Dæmi:</b> Ég hjálpaði <b>honum</b>.",
+        translations: "<b>Enska (English):</b> Explanation: The pronoun 'he' in dative case (him). Example: I helped <b>him</b>.<br>" +
+                      "<b>Pólska (Polski):</b> Objaśnienie: Zaimek 'on' w celowniku (jemu / mu). Przykład: Pomogłem <b>mu</b>.<br>" +
+                      "<b>Spænska (Español):</b> Explicación: El pronombre 'él' en caso dativo (a él / le). Ejemplo: <b>Le</b> ayudé (a él).<br>" +
+                      "<b>Víetnamska (Tiếng Việt):</b> Giải thích: Đại từ 'anh ấy' ở cách tặng (cho/giúp anh ấy). Ví dụ: Tôi đã giúp <b>anh ấy</b>.<br>" +
+                      "<b>Arabíska (العربية):</b> الشرح: الضمير 'هو' في حالة الجر (له). مثال: أنا ساعدتـ<b>ـه</b>.<br>" +
+                      "<b>Rússneska (Русский):</b> Объяснение: Местоимение 'он' в дательном падеже (ему). Пример: Я помог <b>ему</b>.<br>" +
+                      "<b>Úkraínska (Українська):</b> Пояснення: Займенник 'він' у давальному відмінку (йому). Приклад: Я допоміг <b>йому</b>.<br>" +
+                      "<b>Persneska (فارسی):</b> توضیح: ضمیر «او (مذکر)» در حالت مفعولی (به او). مثال: من به <b>او</b> کمک کردم."
+    },
+    { 
+        text: "hér", 
+        is_exp: "<b>Útskýring:</b> Atviksorð sem vísar til staðsetningar, mjög nálægt þeim sem talar.<br><b>Dæmi:</b> Það er heitt <b>hér</b>.",
+        translations: "<b>Enska (English):</b> Explanation: Adverb indicating location, meaning 'here'. Example: It is hot <b>here</b>.<br>" +
+                      "<b>Pólska (Polski):</b> Objaśnienie: Przysłówek wskazujący miejsce (tutaj). Przykład: Jest <b>tutaj</b> gorąco.<br>" +
+                      "<b>Spænska (Español):</b> Explicación: Adverbio de lugar que significa 'aquí'. Ejemplo: Hace calor <b>aquí</b>.<br>" +
+                      "<b>Víetnamska (Tiếng Việt):</b> Giải thích: Trạng từ chỉ địa điểm, nghĩa là 'ở đây'. Ví dụ: <b>Ở đây</b> rất nóng.<br>" +
+                      "<b>Arabíska (العربية):</b> الشرح: ظرف يشير للمكان بمعنى 'هنا'. مثال: الجو حار <b>هنا</b>.<br>" +
+                      "<b>Rússneska (Русский):</b> Объяснение: Наречие места, означающее 'здесь'. Пример: <b>Здесь</b> жарко.<br>" +
+                      "<b>Úkraínska (Українська):</b> Пояснення: Прислівник місця, що означає 'тут'. Приклад: <b>Тут</b> гаряче.<br>" +
+                      "<b>Persneska (فارسی):</b> توضیح: قید مکان به معنی «اینجا». مثال: <b>اینجا</b> گرم است."
+    },
+    { 
+        text: "má", 
+        is_exp: "<b>Útskýring:</b> Sagnorðið „að mega“ í nútíð, 1. eða 3. persónu eintölu. Þýðir að hafa leyfi til einhvers.<br><b>Dæmi:</b> <b>Má</b> ég fá vatn?",
+        translations: "<b>Enska (English):</b> Explanation: The verb 'mega' (may / can) indicating permission. Example: <b>May</b> I have some water?<br>" +
+                      "<b>Pólska (Polski):</b> Objaśnienie: Czasownik oznaczający pozwolenie (móc / czy mogę). Przykład: <b>Czy mogę</b> prosić o wodę?<br>" +
+                      "<b>Spænska (Español):</b> Explicación: El verbo que indica permiso (poder). Ejemplo: ¿<b>Puedo</b> tener agua?<br>" +
+                      "<b>Víetnamska (Tiếng Việt):</b> Giải thích: Động từ chỉ sự cho phép (có thể / được). Ví dụ: Tôi <b>có thể</b> xin nước không?<br>" +
+                      "<b>Arabíska (العربية):</b> الشرح: فعل يفيد الإذن (هل يمكنني / يجوز). مثال: <b>هل يمكنني</b> الحصول على ماء؟<br>" +
+                      "<b>Rússneska (Русский):</b> Объяснение: Глагол, выражающий разрешение (можно / могу). Пример: <b>Можно</b> мне воды?<br>" +
+                      "<b>Úkraínska (Українська):</b> Пояснення: Дієслово, що виражає дозвіл (можна / можу). Приклад: <b>Можна</b> мені води?<br>" +
+                      "<b>Persneska (فارسی):</b> توضیح: فعل دلالت بر اجازه داشتن (می‌توانم / آیا اجازه هست). مثال: <b>آیا می‌توانم</b> آب بخورم؟"
+    },
+    { 
+        text: "sé", 
+        is_exp: "<b>Útskýring:</b> Sagnorðið „að sjá“ í fyrstu persónu eintölu, framsöguhætti eða viðtengingarhætti.<br><b>Dæmi:</b> Ég <b>sé</b> stóran hund.",
+        translations: "<b>Enska (English):</b> Explanation: The verb 'to see' in the 1st person singular (I see). Example: I <b>see</b> a big dog.<br>" +
+                      "<b>Pólska (Polski):</b> Objaśnienie: Czasownik 'widzieć' w 1. osobie (widzę). Przykład: <b>Widzę</b> dużego psa.<br>" +
+                      "<b>Spænska (Español):</b> Explicación: El verbo 'ver' en primera persona (yo veo). Ejemplo: Yo <b>veo</b> un perro grande.<br>" +
+                      "<b>Víetnamska (Tiếng Việt):</b> Giải thích: Động từ 'nhìn thấy' ở ngôi thứ nhất (tôi thấy). Ví dụ: Tôi <b>thấy</b> một con chó lớn.<br>" +
+                      "<b>Arabíska (العربية):</b> الشرح: الفعل 'يرى' في صيغة المتكلم (أنا أرى). مثال: أنا <b>أرى</b> كلباً كبيراً.<br>" +
+                      "<b>Rússneska (Русский):</b> Объяснение: Глагол 'видеть' в 1-м лице (вижу). Пример: Я <b>вижу</b> большую собаку.<br>" +
+                      "<b>Úkraínska (Українська):</b> Пояснення: Дієслово 'бачити' в 1-й особі (бачу). Приклад: Я <b>бачу</b> великого собаку.<br>" +
+                      "<b>Persneska (فارسی):</b> توضیح: فعل «دیدن» در اول شخص مفرد (می‌بینم). مثال: من یک سگ بزرگ <b>می‌بینم</b>."
+    },
+    { 
+        text: "hans", 
+        is_exp: "<b>Útskýring:</b> Eignarfornafn í karlkyni, 3. persónu eintölu. Vísar til þess að maður eða strákur eigi eitthvað.<br><b>Dæmi:</b> Þetta er bíllinn <b>hans</b>.",
+        translations: "<b>Enska (English):</b> Explanation: Possessive pronoun for masculine singular (his). Example: This is <b>his</b> car.<br>" +
+                      "<b>Pólska (Polski):</b> Objaśnienie: Zaimek dzierżawczy dla rodzaju męskiego (jego). Przykład: To jest <b>jego</b> samochód.<br>" +
+                      "<b>Spænska (Español):</b> Explicación: Pronombre posesivo masculino singular (su / de él). Ejemplo: Este es <b>su</b> coche.<br>" +
+                      "<b>Víetnamska (Tiếng Việt):</b> Giải thích: Đại từ sở hữu cho giống đực số ít (của anh ấy). Ví dụ: Đây là ô tô <b>của anh ấy</b>.<br>" +
+                      "<b>Arabíska (العربية):</b> الشرح: ضمير ملكية للمفرد المذكر (خاصته / له). مثال: هذه سيارتـ<b>ـه</b>.<br>" +
+                      "<b>Rússneska (Русский):</b> Объяснение: Притяжательное местоимение мужского рода (его). Пример: Это <b>его</b> машина.<br>" +
+                      "<b>Úkraínska (Українська):</b> Пояснення: Прислівний займенник чоловічого роду (його). Приклад: Це <b>його</b> машина.<br>" +
+                      "<b>Persneska (فارسی):</b> توضیح: ضمیر ملکی برای مذکر (مال او). مثال: این ماشینِ <b>او</b> است."
+    },
+    { 
+        text: "hver", 
+        is_exp: "<b>Útskýring:</b> Spurnarfornafn notað til að spyrja um manneskju (eða manneskjur).<br><b>Dæmi:</b> <b>Hver</b> er þarna?",
+        translations: "<b>Enska (English):</b> Explanation: Question pronoun used to ask about a person (who). Example: <b>Who</b> is there?<br>" +
+                      "<b>Pólska (Polski):</b> Objaśnienie: Zaimek pytający o osobę (kto). Przykład: <b>Kto</b> tam jest?<br>" +
+                      "<b>Spænska (Español):</b> Explicación: Pronombre interrogativo para personas (quién). Ejemplo: ¿<b>Quién</b> está ahí?<br>" +
+                      "<b>Víetnamska (Tiếng Việt):</b> Giải thích: Đại từ nghi vấn dùng để hỏi về người (ai). Ví dụ: <b>Ai</b> ở đó vậy?<br>" +
+                      "<b>Arabíska (العربية):</b> الشرح: ضمير استفهام للسؤال عن شخص (مَن). مثال: <b>مَن</b> هناك؟<br>" +
+                      "<b>Rússneska (Русский):</b> Объяснение: Вопросительное местоимение о человеке (кто). Пример: <b>Кто</b> там?<br>" +
+                      "<b>Úkraínska (Українська):</b> Пояснення: Питальний займенник про людину (хто). Приклад: <b>Хто</b> там?<br>" +
+                      "<b>Persneska (فارسی):</b> توضیح: ضمیر پرسشی برای پرسیدن درباره یک شخص (چه کسی). مثال: <b>چه کسی</b> آنجاست؟"
+    }
+];
+
+let userScores = new Array(exerciseData.length).fill(null);
+let userSpoken = new Array(exerciseData.length).fill("");
+
+let currentIndex = 0;
+let recognition;
+let isRecording = false;
+let autoAdvanceTimer = null;
+
+const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+if (SpeechRecognition) {
+    recognition = new SpeechRecognition();
+    recognition.lang = 'is-IS';
+    recognition.continuous = false;
+    recognition.interimResults = false;
+    
+    // Slökkt sjálfkrafa þegar talningu eða þögn er lokið
+    recognition.onend = () => {
+        isRecording = false;
+        const btn = document.getElementById('record-btn');
+        if (btn) {
+            btn.innerText = "🎤 Tala";
+            btn.classList.remove('recording');
+        }
+        
+        // Hreinsa stöðutexta ef ekkert orð fannst
+        const resDiv = document.getElementById('result');
+        if (resDiv && resDiv.innerText === "Hlusta...") {
+            resDiv.innerText = "";
+        }
+    };
+} else {
+    alert("Þessi vafri styður ekki talgreiningu. Notaðu Chrome eða Edge á tölvu.");
+}
+
+window.onload = () => { 
+    updateUI(); 
+};
+
+function updateProgress() {
+    let correctCount = 0;
+    for (let i = 0; i < userScores.length; i++) {
+        if (userScores[i] === 100) {
+            correctCount++;
+        }
+    }
+    const percent = (correctCount / exerciseData.length) * 100;
+    document.getElementById('progress-bar').style.width = percent + '%';
+    return correctCount;
+}
+
+function findNextUnfinished() {
+    for (let i = 0; i < userScores.length; i++) {
+        if (userScores[i] !== 100) {
+            currentIndex = i;
+            break;
+        }
+    }
+    document.getElementById('app').innerHTML = `
+        <h1>Æfing 61 - 70 algengustu orðin í íslenskum námsbókum</h1>
+        <div class="progress-container"><div id="progress-bar"></div></div>
+        <div id="counter"></div>
+        <div id="target"></div>
+        <div id="is-explanation"></div>
+        <br>
+        <button id="record-btn" class="btn" onclick="toggleRecord()">🎤 Tala</button>
+        <div id="spoken"></div>
+        <div id="result"></div>
+        <div id="media-box"></div>
+        <div class="nav-btns">
+            <button class="btn" style="background-color: #5f6368;" onclick="prevExercise()">⬅️ Fyrri</button>
+            <button class="btn" style="background-color: #5f6368;" onclick="nextExercise()">Næsta ➡️</button>
+        </div>
+    `;
+    updateUI();
+}
+
+function updateUI() {
+    clearTimeout(autoAdvanceTimer); 
+    const correctCount = updateProgress();
+
+    if (currentIndex >= exerciseData.length) {
+        if (correctCount === exerciseData.length) {
+            document.getElementById('app').innerHTML = `
+                <div class="progress-container"><div id="progress-bar" style="width: 100%;"></div></div>
+                <h1 style="color: #34a853; font-size: 2.5em;">Frábært! Þú náðir 100% árangri! 🎉</h1>
+                <p style="font-size: 1.2em; color: #555;">Skrifaðu nafnið þitt hér að neðan til að sækja viðurkenningarskjalið þitt.</p>
+                <input type="text" id="studentName" placeholder="Skrifaðu nafnið þitt hér" autocomplete="off"><br>
+                <button id="cert-btn" class="btn" style="background-color: #1a73e8; font-size: 1.5em; padding: 15px 30px; margin-top: 10px;" onclick="downloadCert()">🏆 Sækja viðurkenningarskjal</button>
+                <br><br>
+                <button class="btn" style="background-color: #5f6368;" onclick="location.reload()">🔄 Byrja aftur</button>
+            `;
+        } else {
+            document.getElementById('app').innerHTML = `
+                <div class="progress-container"><div id="progress-bar" style="width: ${(correctCount/exerciseData.length)*100}%;"></div></div>
+                <h1 style="color: #fbbc05; font-size: 2em;">Þú ert næstum því búin(n)!</h1>
+                <p style="font-size: 1.2em;">Þú hefur klárað ${correctCount} af ${exerciseData.length} orðum með 100% árangri.</p>
+                <p style="font-size: 1.1em; color: #555;">Farðu til baka og reyndu aftur við þau orð sem vantaði upp á til að fá skjalið.</p>
+                <button class="btn" style="background-color: #fbbc05; color: #000;" onclick="findNextUnfinished()">➡️ Fara á orð sem vantar</button>
+            `;
+        }
+        return;
+    }
+
+    const curr = exerciseData[currentIndex];
+    document.getElementById('target').innerHTML = curr.text;
+    document.getElementById('is-explanation').innerHTML = curr.is_exp;
+    document.getElementById('counter').innerText = `Orð ${currentIndex + 1} af ${exerciseData.length}`;
+    document.getElementById('media-box').innerHTML = curr.translations;
+
+    const savedScore = userScores[currentIndex];
+    const savedText = userSpoken[currentIndex];
+
+    if (savedScore !== null) {
+        document.getElementById('result').innerText = `Einkunn: ${savedScore}%`;
+        document.getElementById('spoken').innerText = `Þú sagðir: "${savedText}"`;
+    } else {
+        document.getElementById('result').innerText = "";
+        document.getElementById('spoken').innerText = "";
+    }
+}
+
+function nextExercise() {
+    currentIndex++;
+    updateUI();
+}
+
+function prevExercise() {
+    if (currentIndex > 0) {
+        currentIndex--;
+        updateUI();
+    }
+}
+
+function toggleRecord() {
+    if (!recognition) return;
+
+    const btn = document.getElementById('record-btn');
+    if (isRecording) {
+        recognition.stop();
+    } else {
+        try {
+            recognition.start();
+            isRecording = true;
+            btn.innerText = "🛑 Hlusta...";
+            btn.classList.add('recording');
+            document.getElementById('result').innerText = "Hlusta...";
+            document.getElementById('spoken').innerText = "";
+        } catch(e) {
+            console.log("Villa í upptöku: " + e);
+        }
+    }
+}
+
+if (recognition) {
+    recognition.onresult = (event) => {
+        let spoken = event.results[0][0].transcript;
+        spoken = spoken.trim().toLowerCase(); 
+
+        document.getElementById('spoken').innerText = `Þú sagðir: "${spoken}"`;
+        
+        const targetWord = exerciseData[currentIndex].text.toLowerCase();
+        
+        let score = (spoken === targetWord) ? 100 : 0;
+        
+        if (spoken.replace(/[.,/#!$%^&*;:{}=\-_`~()]/g,"").trim() === targetWord) {
+            score = 100;
+        }
+        
+        document.getElementById('result').innerText = `Einkunn: ${score}%`;
+
+        userScores[currentIndex] = score;
+        userSpoken[currentIndex] = spoken;
+        
+        updateProgress();
+
+        if (score === 100) {
+            autoAdvanceTimer = setTimeout(() => {
+                nextExercise();
+            }, 1000); // 1 sekúndu bið
+        }
+    };
+}
+
+function downloadCert() {
+    const studentNameInput = document.getElementById('studentName');
+    const studentName = studentNameInput ? studentNameInput.value.trim() : "";
+    
+    if (studentName === "") {
+        alert("Vinsamlegast skrifaðu nafnið þitt fyrst!");
+        return;
+    }
+
+    const canvas = document.createElement('canvas');
+    canvas.width = 900;
+    canvas.height = 600;
+    const ctx = canvas.getContext('2d');
+    
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    
+    ctx.strokeStyle = '#1a73e8';
+    ctx.lineWidth = 15;
+    ctx.strokeRect(20, 20, canvas.width - 40, canvas.height - 40);
+
+    ctx.strokeStyle = '#fbbc05';
+    ctx.lineWidth = 5;
+    ctx.strokeRect(40, 40, canvas.width - 80, canvas.height - 80);
+    
+    ctx.fillStyle = '#1a73e8';
+    ctx.textAlign = 'center';
+    ctx.font = 'bold 50px Arial';
+    ctx.fillText('Viðurkenning', canvas.width / 2, 140);
+    
+    ctx.fillStyle = '#333333';
+    ctx.font = '24px Arial';
+    ctx.fillText('Þetta skjal staðfestir að', canvas.width / 2, 220);
+    
+    ctx.fillStyle = '#000000';
+    ctx.font = 'bold 45px Arial';
+    ctx.fillText(studentName, canvas.width / 2, 290);
+    
+    ctx.fillStyle = '#333333';
+    ctx.font = '24px Arial';
+    ctx.fillText('hefur lokið æfingunni með glæsibrag:', canvas.width / 2, 360);
+
+    ctx.fillStyle = '#1a73e8';
+    ctx.font = 'bold 26px Arial';
+    ctx.fillText('Æfing 61 - 70 algengustu orðin í íslenskum námsbókum', canvas.width / 2, 420);
+    
+    ctx.fillStyle = '#34a853';
+    ctx.font = 'italic 28px Arial';
+    ctx.fillText('Frábær árangur! Haltu áfram að æfa þig.', canvas.width / 2, 490);
+
+    const dateString = new Date().toLocaleDateString('is-IS');
+    ctx.fillStyle = '#666666';
+    ctx.font = '18px Arial';
+    ctx.fillText('Dagsetning: ' + dateString, canvas.width / 2, 540);
+    
+    const link = document.createElement('a');
+    link.download = `Vidurkenning_${studentName.replace(/\s+/g, '_')}.png`;
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+    
+    // Slekkur á takkanum til að koma í veg fyrir mörg skjöl
+    const btn = document.getElementById('cert-btn');
+    if (btn) {
+        btn.disabled = true;
+        btn.innerText = "✅ Skjal sótt";
+        btn.style.backgroundColor = "#5f6368";
+        btn.style.cursor = "not-allowed";
+        btn.style.opacity = "0.7";
+    }
+}
+</script>
+
+</body>
+</html>
