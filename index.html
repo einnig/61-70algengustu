@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Æfing 61 - 70 algengustu orðin í íslenskum námsbókum</title>
+    <title>Markorð 61 - 70</title>
     <style>
         body { 
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
@@ -91,7 +91,7 @@
         }
 
         #media-box { 
-            font-size: 1.1em; 
+            font-size: 1.05em; 
             color: #444; 
             text-align: left; 
             background: #f8fbff; 
@@ -101,7 +101,7 @@
             border-left: 6px solid #1a73e8; 
             margin-top: 15px;
             display: inline-block;
-            min-width: 60%;
+            min-width: 70%;
         }
         #spoken {
             margin-top: 15px; 
@@ -129,12 +129,28 @@
             border-radius: 8px;
             text-align: center;
         }
+
+        .feedback-note {
+            margin-top: 40px;
+            font-size: 0.95em;
+            color: #555;
+            padding-top: 15px;
+            border-top: 1px solid #ddd;
+        }
+        .feedback-note a {
+            color: #1a73e8;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .feedback-note a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
 
 <div class="container" id="app">
-    <h1>Æfing 61 - 70 algengustu orðin í íslenskum námsbókum</h1>
+    <h1>Markorð 61 - 70</h1>
     
     <div class="progress-container">
         <div id="progress-bar"></div>
@@ -156,129 +172,173 @@
         <button class="btn" style="background-color: #5f6368;" onclick="prevExercise()">⬅️ Fyrri</button>
         <button class="btn" style="background-color: #5f6368;" onclick="nextExercise()">Næsta ➡️</button>
     </div>
+
+    <div class="feedback-note">
+        Þetta er tilraunaútgáfa. Vinsamlegast sendið ábendingar á <a href="mailto:dgu@fb.is">dgu@fb.is</a>
+    </div>
 </div>
 
 <script>
 const exerciseData = [
     { 
         text: "vel", 
-        is_exp: "<b>Útskýring:</b> Atviksorð sem þýðir að gera eitthvað á góðan eða réttan hátt.<br><b>Dæmi:</b> Hann spilar mjög <b>vel</b>.",
-        translations: "<b>Enska (English):</b> Explanation: Adverb meaning 'well' or 'good'. Example: He plays very <b>well</b>.<br>" +
-                      "<b>Pólska (Polski):</b> Objaśnienie: Przysłówek oznaczający 'dobrze'. Przykład: On gra bardzo <b>dobrze</b>.<br>" +
-                      "<b>Spænska (Español):</b> Explicación: Adverbio que significa 'bien'. Ejemplo: Él juega muy <b>bien</b>.<br>" +
-                      "<b>Víetnamska (Tiếng Việt):</b> Giải thích: Trạng từ nghĩa là 'tốt' hoặc 'hay'. Ví dụ: Anh ấy chơi rất <b>hay</b>.<br>" +
-                      "<b>Arabíska (العربية):</b> الشرح: ظرف بمعنى 'جيداً' أو 'بشكل جيد'. مثال: هو يلعب بشكل <b>جيد</b> جداً.<br>" +
-                      "<b>Rússneska (Русский):</b> Объяснение: Наречие, означающее 'хорошо'. Пример: Он играет очень <b>хорошо</b>.<br>" +
-                      "<b>Úkraínska (Українська):</b> Пояснення: Прислівник, що означає 'добре'. Приклад: Він грає дуже <b>добре</b>.<br>" +
-                      "<b>Persneska (فارسی):</b> توضیح: قید به معنی «خوب». مثال: او خیلی <b>خوب</b> بازی می‌کند."
+        is_exp: "<b>Útskýring:</b> Atviksorð sem þýðir að gera eitthvað á góðan eða réttan hátt. Andheiti: <i>illa</i>.<br><b>Dæmi:</b> Hann spilar mjög <b>vel</b>.",
+        translations: "<b>Enska (English):</b> Explanation: Adverb meaning to do something in a good or correct way (well). Antonym: illa (badly). Example: He plays very <b>well</b>.<br>" +
+                      "<b>Pólska (Polski):</b> Objaśnienie: Przysłówek oznaczający robienie czegoś w dobry lub właściwy sposób (dobrze). Antonim: illa (źle). Przykład: On gra bardzo <b>dobrze</b>.<br>" +
+                      "<b>Spænska (Español):</b> Explicación: Adverbio que significa hacer algo de buena o correcta manera (bien). Antónimo: illa (mal). Ejemplo: Él juega muy <b>bien</b>.<br>" +
+                      "<b>Víetnamska (Tiếng Việt):</b> Giải thích: Trạng từ có nghĩa là làm việc gì đó một cách tốt hoặc đúng (tốt/giỏi). Từ trái nghĩa: illa (tệ). Ví dụ: Anh ấy chơi rất <b>giỏi</b>.<br>" +
+                      "<b>Arabíska (العربية):</b> الشرح: ظرف يعني القيام بشيء بطريقة جيدة أو صحيحة (جيداً). مضاد: illa (بشكل سيء). مثال: هو يلعب بشكل <b>جيد</b> جداً.<br>" +
+                      "<b>Rússneska (Русский):</b> Объяснение: Наречие, означающее делать что-то хорошим или правильным образом (хорошо). Антоним: illa (плохо). Пример: Он играет очень <b>хорошо</b>.<br>" +
+                      "<b>Úkraínska (Українська):</b> Пояснення: Прислівник, що означає робити щось у хороший або правильний спосіб (добре). Антонім: illa (погано). Приклад: Він грає дуже <b>добре</b>.<br>" +
+                      "<b>Persneska (فارسی):</b> توضیح: قید به معنی انجام کاری به روش خوب یا درست (خوب). متضاد: illa (بد). مثال: او خیلی <b>خوب</b> بازی می‌کند.<br>" +
+                      "<b>Tælenska (ไทย):</b> คำอธิบาย: กริยาวิเศษณ์หมายถึงทำบางสิ่งด้วยวิธีที่ดีหรือถูกต้อง (ดี) คำตรงข้าม: illa (แย่) ตัวอย่าง: เขาเล่นได้<b>ดี</b>มาก<br>" +
+                      "<b>Portúgalska (Português):</b> Explicativo: Advérbio que significa fazer algo de maneira boa ou correta (bem). Antônimo: illa (mal). Exemplo: Ele joga muito <b>bem</b>.<br>" +
+                      "<b>Kínverska (中文):</b> 解释：副词，意思是把某事做得很好或正确（好）。反义词：illa（糟糕）。 例句：他玩得（或弹得）很<b>好</b>。<br>" +
+                      "<b>Lettneska (Latviešu):</b> Paskaidrojums: Apstākļa vārds, kas nozīmē kaut ko darīt labā vai pareizā veidā (labi). Antonīms: illa (slikti). Piemērs: Viņš spēlē ļoti <b>labi</b>."
     },
     { 
         text: "hvaða", 
-        is_exp: "<b>Útskýring:</b> Spurnarfornafn sem er notað til að spyrja um tegund eða val.<br><b>Dæmi:</b> <b>Hvaða</b> litur er þetta?",
-        translations: "<b>Enska (English):</b> Explanation: Question word meaning 'what' or 'which'. Example: <b>What</b> color is this?<br>" +
-                      "<b>Pólska (Polski):</b> Objaśnienie: Zaimek pytający oznaczający 'jaki' lub 'który'. Przykład: <b>Jaki</b> to kolor?<br>" +
-                      "<b>Spænska (Español):</b> Explicación: Pronombre interrogativo que significa 'qué' o 'cuál'. Ejemplo: ¿<b>Qué</b> color es este?<br>" +
-                      "<b>Víetnamska (Tiếng Việt):</b> Giải thích: Từ để hỏi nghĩa là 'nào' hoặc 'gì'. Ví dụ: Đây là màu <b>gì</b>?<br>" +
-                      "<b>Arabíska (العربية):</b> الشرح: أداة استفهام تعني 'أي' أو 'ماذا'. مثال: <b>أي</b> لون هذا؟<br>" +
-                      "<b>Rússneska (Русский):</b> Объяснение: Вопросительное местоимение, означающее 'какой'. Пример: <b>Какой</b> это цвет?<br>" +
-                      "<b>Úkraínska (Українська):</b> Пояснення: Питальний займенник, що означає 'який'. Приклад: <b>Який</b> це колір?<br>" +
-                      "<b>Persneska (فارسی):</b> توضیح: کلمه پرسشی به معنی «کدام» یا «چه». مثال: این <b>چه</b> رنگی است؟"
+        is_exp: "<b>Útskýring:</b> Spurnarfornafn sem er notað til að spyrja um tegund, hlut eða val.<br><b>Dæmi:</b> <b>Hvaða</b> litur er þetta?",
+        translations: "<b>Enska (English):</b> Explanation: Question word used to ask about a type, object, or choice (which/what). Example: <b>What</b> color is this?<br>" +
+                      "<b>Pólska (Polski):</b> Objaśnienie: Zaimek pytający używany do pytania o rodzaj, rzecz lub wybór (jaki/który). Przykład: <b>Jaki</b> to kolor?<br>" +
+                      "<b>Spænska (Español):</b> Explicación: Pronombre interrogativo usado para preguntar sobre un tipo, objeto o elección (qué/cuál). Ejemplo: ¿<b>Qué</b> color es este?<br>" +
+                      "<b>Víetnamska (Tiếng Việt):</b> Giải thích: Từ để hỏi dùng để hỏi về loại, đồ vật hoặc sự lựa chọn (nào/gì). Ví dụ: Đây là màu <b>gì</b>?<br>" +
+                      "<b>Arabíska (العربية):</b> الشرح: أداة استفهام تستخدم للسؤال عن نوع، شيء، أو اختيار (أي/ما). مثال: <b>أي</b> لون هذا؟<br>" +
+                      "<b>Rússneska (Русский):</b> Объяснение: Вопросительное местоимение, используемое для вопроса о типе, предмете или выборе (какой). Пример: <b>Какой</b> это цвет?<br>" +
+                      "<b>Úkraínska (Українська):</b> Пояснення: Питальний займенник, що використовується для запитання про тип, предмет або вибір (який). Приклад: <b>Який</b> це колір?<br>" +
+                      "<b>Persneska (فارسی):</b> توضیح: کلمه پرسشی که برای پرسیدن درباره نوع، شیء یا انتخاب استفاده می‌شود (کدام/چه). مثال: این <b>چه</b> رنگی است؟<br>" +
+                      "<b>Tælenska (ไทย):</b> คำอธิบาย: คำถามที่ใช้เพื่อถามเกี่ยวกับประเภท สิ่งของ หรือตัวเลือก (อันไหน/อะไร) ตัวอย่าง: นี่สี<b>อะไร</b>?<br>" +
+                      "<b>Portúgalska (Português):</b> Explicativo: Pronome interrogativo usado para perguntar sobre um tipo, objeto ou escolha (qual/que). Exemplo: <b>Que</b> cor é essa?<br>" +
+                      "<b>Kínverska (中文):</b> 解释：用于询问类型、物体或选择的疑问词（哪一个/什么）。 例句：这是<b>什么</b>颜色？<br>" +
+                      "<b>Lettneska (Latviešu):</b> Paskaidrojums: Jautājuma vārds, ko izmanto, lai jautātu par veidu, priekšmetu vai izvēli (kāds/kurš). Piemērs: <b>Kāds</b> krāsa tas ir?"
     },
     { 
         text: "inn", 
-        is_exp: "<b>Útskýring:</b> Atviksorð sem vísar til hreyfingar eða stefnu inn í eitthvað rými.<br><b>Dæmi:</b> Komdu <b>inn</b> í húsið.",
-        translations: "<b>Enska (English):</b> Explanation: Adverb indicating movement 'in' or 'inside'. Example: Come <b>inside</b> the house.<br>" +
-                      "<b>Pólska (Polski):</b> Objaśnienie: Przysłówek wskazujący ruch do środka (w/do). Przykład: Chodź <b>do</b> domu (do środka).<br>" +
-                      "<b>Spænska (Español):</b> Explicación: Adverbio que indica movimiento hacia adentro. Ejemplo: Entra (ven <b>adentro</b>) a la casa.<br>" +
-                      "<b>Víetnamska (Tiếng Việt):</b> Giải thích: Trạng từ chỉ sự di chuyển 'vào trong'. Ví dụ: Hãy vào <b>trong</b> nhà.<br>" +
-                      "<b>Arabíska (العربية):</b> الشرح: ظرف يشير إلى الحركة إلى الداخل. مثال: تعال إلى <b>داخل</b> المنزل.<br>" +
-                      "<b>Rússneska (Русский):</b> Объяснение: Наречие, указывающее на движение 'внутрь'. Пример: Заходи <b>внутрь</b> (в дом).<br>" +
-                      "<b>Úkraínska (Українська):</b> Пояснення: Прислівник, що вказує на рух 'всередину'. Приклад: Заходь <b>всередину</b> (в будинок).<br>" +
-                      "<b>Persneska (فارسی):</b> توضیح: قید که به معنی حرکت به سمت «داخل» است. مثال: بیا <b>داخل</b> خانه."
+        is_exp: "<b>Útskýring:</b> Atviksorð sem vísar til hreyfingar eða stefnu inn í eitthvað rými. Andheiti: <i>út</i>.<br><b>Dæmi:</b> Komdu <b>inn</b> í húsið.",
+        translations: "<b>Enska (English):</b> Explanation: Adverb indicating movement or direction into a space (inside/in). Antonym: út (out). Example: Come <b>inside</b> the house.<br>" +
+                      "<b>Pólska (Polski):</b> Objaśnienie: Przysłówek wskazujący ruch lub kierunek do wnętrza (do środka/w). Antonim: út (na zewnątrz). Przykład: Chodź <b>do</b> domu (do środka).<br>" +
+                      "<b>Spænska (Español):</b> Explicación: Adverbio que indica movimiento o dirección hacia un espacio (adentro/dentro). Antónimo: út (afuera). Ejemplo: Entra (ven <b>adentro</b>) a la casa.<br>" +
+                      "<b>Víetnamska (Tiếng Việt):</b> Giải thích: Trạng từ chỉ sự di chuyển hoặc hướng vào một không gian (vào trong). Từ trái nghĩa: út (ra ngoài). Ví dụ: Hãy vào <b>trong</b> nhà.<br>" +
+                      "<b>Arabíska (العربية):</b> الشرح: ظرف يشير إلى الحركة أو الاتجاه نحو مساحة ما (إلى الداخل). مضاد: út (إلى الخارج). مثال: تعال إلى <b>داخل</b> المنزل.<br>" +
+                      "<b>Rússneska (Русский):</b> Объяснение: Наречие, указывающее на движение или направление внутрь пространства (внутрь/в). Антоним: út (наружу). Пример: Заходи <b>внутрь</b> (в дом).<br>" +
+                      "<b>Úkraínska (Українська):</b> Пояснення: Прислівник, що вказує на рух або напрямок всередину простору (всередину). Антонім: út (назовні). Приклад: Заходь <b>всередину</b> (в будинок).<br>" +
+                      "<b>Persneska (فارسی):</b> توضیح: قیدی که حرکت یا جهت به سمت یک فضا را نشان می‌دهد (داخل). متضاد: út (بیرون). مثال: بیا <b>داخل</b> خانه.<br>" +
+                      "<b>Tælenska (ไทย):</b> คำอธิบาย: กริยาวิเศษณ์บอกการเคลื่อนไหวหรือทิศทางเข้าไปในพื้นที่ (ข้างใน/เข้า) คำตรงข้าม: út (ออก) ตัวอย่าง: เข้ามา<b>ข้างใน</b>บ้านสิ<br>" +
+                      "<b>Portúgalska (Português):</b> Explicativo: Advérbio indicando movimento ou direção para dentro de um espaço (para dentro). Antônimo: út (para fora). Exemplo: Venha <b>para dentro</b> da casa.<br>" +
+                      "<b>Kínverska (中文):</b> 解释：表示进入某空间的动作或方向的副词（里面/进入）。反义词：út（出去）。 例句：进到房子<b>里面</b>来。<br>" +
+                      "<b>Lettneska (Latviešu):</b> Paskaidrojums: Apstākļa vārds, kas norāda uz kustību vai virzienu telpā (iekšā). Antonīms: út (ārā). Piemērs: Nāc <b>iekšā</b> mājā."
     },
     { 
         text: "árið", 
-        is_exp: "<b>Útskýring:</b> Nafnorðið „ár“ með ákveðnum greini. Oft notað þegar talað er um ákveðið ártal.<br><b>Dæmi:</b> Hún fæddist <b>árið</b> 2010.",
-        translations: "<b>Enska (English):</b> Explanation: Noun 'year' with the definite article (the year). Example: She was born in <b>the year</b> 2010.<br>" +
-                      "<b>Pólska (Polski):</b> Objaśnienie: Rzeczownik 'rok' z przedimkiem określonym (w roku). Przykład: Urodziła się w <b>roku</b> 2010.<br>" +
-                      "<b>Spænska (Español):</b> Explicación: Sustantivo 'año' con artículo definido (el año). Ejemplo: Ella nació en <b>el año</b> 2010.<br>" +
-                      "<b>Víetnamska (Tiếng Việt):</b> Giải thích: Danh từ 'năm' với mạo từ xác định. Ví dụ: Cô ấy sinh <b>năm</b> 2010.<br>" +
-                      "<b>Arabíska (العربية):</b> الشرح: اسم 'سنة' أو 'عام' مع أداة التعريف. مثال: هي ولدت في <b>عام</b> 2010.<br>" +
-                      "<b>Rússneska (Русский):</b> Объяснение: Существительное 'год' с определенным артиклем (в году). Пример: Она родилась в 2010 <b>году</b>.<br>" +
-                      "<b>Úkraínska (Українська):</b> Пояснення: Іменник 'рік' з означеним артиклем (у році). Приклад: Вона народилася у 2010 <b>році</b>.<br>" +
-                      "<b>Persneska (فارسی):</b> توضیح: اسم «سال» با حرف تعریف معین (در سالِ). مثال: او در <b>سال</b> ۲۰۱۰ به دنیا آمد."
+        is_exp: "<b>Útskýring:</b> Nafnorðið „ár“ (12 mánuðir) með ákveðnum greini. Oft notað þegar talað er um ákveðið ártal.<br><b>Dæmi:</b> Hún fæddist <b>árið</b> 2010.",
+        translations: "<b>Enska (English):</b> Explanation: The noun 'ár' (year) with the definite article (the year). Often used when talking about a specific year. Example: She was born in <b>the year</b> 2010.<br>" +
+                      "<b>Pólska (Polski):</b> Objaśnienie: Rzeczownik 'ár' (rok) z przedimkiem określonym (ten rok). Często używany, gdy mowa o konkretnym roku. Przykład: Urodziła się w <b>roku</b> 2010.<br>" +
+                      "<b>Spænska (Español):</b> Explicación: El sustantivo 'ár' (año) con artículo definido (el año). A menudo se usa al hablar de un año específico. Ejemplo: Ella nació en <b>el año</b> 2010.<br>" +
+                      "<b>Víetnamska (Tiếng Việt):</b> Giải thích: Danh từ 'ár' (năm) với mạo từ xác định. Thường dùng khi nói về một năm cụ thể. Ví dụ: Cô ấy sinh <b>năm</b> 2010.<br>" +
+                      "<b>Arabíska (العربية):</b> الشرح: اسم 'ár' (سنة) مع أداة التعريف (السنة / العام). غالباً ما يُستخدم عند الحديث عن سنة معينة. مثال: هي ولدت في <b>عام</b> 2010.<br>" +
+                      "<b>Rússneska (Русский):</b> Объяснение: Существительное 'ár' (год) с определенным артиклем. Часто используется, когда речь идет о конкретном годе. Пример: Она родилась в 2010 <b>году</b>.<br>" +
+                      "<b>Úkraínska (Українська):</b> Пояснення: Іменник 'ár' (рік) з означеним артиклем. Часто використовується, коли йдеться про конкретний рік. Приклад: Вона народилася у 2010 <b>році</b>.<br>" +
+                      "<b>Persneska (فارسی):</b> توضیح: اسم «ár» (سال) با حرف تعریف معین. اغلب هنگام صحبت در مورد یک سال خاص استفاده می‌شود. مثال: او در <b>سال</b> ۲۰۱۰ به دنیا آمد.<br>" +
+                      "<b>Tælenska (ไทย):</b> คำอธิบาย: คำนาม 'ár' (ปี) ในรูปแบบชี้เฉพาะ มักใช้เมื่อพูดถึงปีใดปีหนึ่ง ตัวอย่าง: เธอเกิดใน<b>ปี</b> 2010<br>" +
+                      "<b>Portúgalska (Português):</b> Explicativo: O substantivo 'ár' (ano) com o artigo definido (o ano). Frequentemente usado ao falar sobre um ano específico. Exemplo: Ela nasceu no <b>ano</b> 2010.<br>" +
+                      "<b>Kínverska (中文):</b> 解释：带有定冠词的名词“ár”（年）。常用于谈论具体年份时。 例句：她出生于2010<b>年</b>。<br>" +
+                      "<b>Lettneska (Latviešu):</b> Paskaidrojums: Lietvārds 'ár' (gads) ar noteikto artikulu. Bieži tiek lietots, runājot par konkrētu gadu. Piemērs: Viņa dzimusi 2010. <b>gadā</b>."
     },
     { 
         text: "honum", 
-        is_exp: "<b>Útskýring:</b> Fornafnið „hann“ í þágufalli. Oft notað eftir sagnorðum eins og „að hjálpa“ eða forsetningum.<br><b>Dæmi:</b> Ég hjálpaði <b>honum</b>.",
-        translations: "<b>Enska (English):</b> Explanation: The pronoun 'he' in dative case (him). Example: I helped <b>him</b>.<br>" +
-                      "<b>Pólska (Polski):</b> Objaśnienie: Zaimek 'on' w celowniku (jemu / mu). Przykład: Pomogłem <b>mu</b>.<br>" +
-                      "<b>Spænska (Español):</b> Explicación: El pronombre 'él' en caso dativo (a él / le). Ejemplo: <b>Le</b> ayudé (a él).<br>" +
-                      "<b>Víetnamska (Tiếng Việt):</b> Giải thích: Đại từ 'anh ấy' ở cách tặng (cho/giúp anh ấy). Ví dụ: Tôi đã giúp <b>anh ấy</b>.<br>" +
-                      "<b>Arabíska (العربية):</b> الشرح: الضمير 'هو' في حالة الجر (له). مثال: أنا ساعدتـ<b>ـه</b>.<br>" +
-                      "<b>Rússneska (Русский):</b> Объяснение: Местоимение 'он' в дательном падеже (ему). Пример: Я помог <b>ему</b>.<br>" +
-                      "<b>Úkraínska (Українська):</b> Пояснення: Займенник 'він' у давальному відмінку (йому). Приклад: Я допоміг <b>йому</b>.<br>" +
-                      "<b>Persneska (فارسی):</b> توضیح: ضمیر «او (مذکر)» در حالت مفعولی (به او). مثال: من به <b>او</b> کمک کردم."
+        is_exp: "<b>Útskýring:</b> Fornafnið „hann“ í þágufalli. Oft notað eftir sagnorðum eins og „að hjálpa“ eða ákveðnum forsetningum.<br><b>Dæmi:</b> Ég hjálpaði <b>honum</b>.",
+        translations: "<b>Enska (English):</b> Explanation: The pronoun 'hann' (he) in the dative case (him). Often used after verbs like 'to help' or certain prepositions. Example: I helped <b>him</b>.<br>" +
+                      "<b>Pólska (Polski):</b> Objaśnienie: Zaimek 'hann' (on) w celowniku (jemu / mu). Często używany po czasownikach takich jak 'pomagać' lub po przyimkach. Przykład: Pomogłem <b>mu</b>.<br>" +
+                      "<b>Spænska (Español):</b> Explicación: El pronombre 'hann' (él) en caso dativo (le / a él). Se usa a menudo después de verbos como 'ayudar' o ciertas preposiciones. Ejemplo: <b>Le</b> ayudé (a él).<br>" +
+                      "<b>Víetnamska (Tiếng Việt):</b> Giải thích: Đại từ 'hann' (anh ấy) ở cách tặng (cho/giúp anh ấy). Thường dùng sau các động từ như 'giúp đỡ' hoặc giới từ. Ví dụ: Tôi đã giúp <b>anh ấy</b>.<br>" +
+                      "<b>Arabíska (العربية):</b> الشرح: الضمير 'hann' (هو) في حالة الجر (له). يُستخدم غالباً بعد أفعال مثل 'يساعد' أو حروف جر معينة. مثال: أنا ساعدتـ<b>ـه</b>.<br>" +
+                      "<b>Rússneska (Русский):</b> Объяснение: Местоимение 'hann' (он) в дательном падеже (ему). Часто используется после глаголов типа 'помогать' или предлогов. Пример: Я помог <b>ему</b>.<br>" +
+                      "<b>Úkraínska (Українська):</b> Пояснення: Займенник 'hann' (він) у давальному відмінку (йому). Часто використовується після дієслів на зразок 'допомагати' або прийменників. Приклад: Я допоміг <b>йому</b>.<br>" +
+                      "<b>Persneska (فارسی):</b> توضیح: ضمیر «hann» (او-مذکر) در حالت مفعولی با واسطه (به او). اغلب بعد از افعالی مانند «کمک کردن» استفاده می‌شود. مثال: من به <b>او</b> کمک کردم.<br>" +
+                      "<b>Tælenska (ไทย):</b> คำอธิบาย: สรรพนาม 'hann' (เขาผู้ชาย) ในรูปกรรม มักใช้หลังกริยาเช่น 'ช่วยเหลือ' หรือบุพบทบางคำ ตัวอย่าง: ฉันได้ช่วยเหลือ<b>เขา</b><br>" +
+                      "<b>Portúgalska (Português):</b> Explicativo: O pronome 'hann' (ele) no caso dativo (lhe / a ele). Frequentemente usado após verbos como 'ajudar' ou certas preposições. Exemplo: Eu <b>o</b> ajudei / ajudei a <b>ele</b>.<br>" +
+                      "<b>Kínverska (中文):</b> 解释：代词“hann”（他）的与格形式（给他）。常用于动词“帮助”或特定介词之后。 例句：我帮助了<b>他</b>。<br>" +
+                      "<b>Lettneska (Latviešu):</b> Paskaidrojums: Vietniekvārds 'hann' (viņš) datīvā (viņam). Bieži tiek lietots pēc darbības vārdiem kā 'palīdzēt' vai noteiktiem prievārdiem. Piemērs: Es <b>viņam</b> palīdzēju."
     },
     { 
         text: "hér", 
-        is_exp: "<b>Útskýring:</b> Atviksorð sem vísar til staðsetningar, mjög nálægt þeim sem talar.<br><b>Dæmi:</b> Það er heitt <b>hér</b>.",
-        translations: "<b>Enska (English):</b> Explanation: Adverb indicating location, meaning 'here'. Example: It is hot <b>here</b>.<br>" +
-                      "<b>Pólska (Polski):</b> Objaśnienie: Przysłówek wskazujący miejsce (tutaj). Przykład: Jest <b>tutaj</b> gorąco.<br>" +
-                      "<b>Spænska (Español):</b> Explicación: Adverbio de lugar que significa 'aquí'. Ejemplo: Hace calor <b>aquí</b>.<br>" +
-                      "<b>Víetnamska (Tiếng Việt):</b> Giải thích: Trạng từ chỉ địa điểm, nghĩa là 'ở đây'. Ví dụ: <b>Ở đây</b> rất nóng.<br>" +
-                      "<b>Arabíska (العربية):</b> الشرح: ظرف يشير للمكان بمعنى 'هنا'. مثال: الجو حار <b>هنا</b>.<br>" +
-                      "<b>Rússneska (Русский):</b> Объяснение: Наречие места, означающее 'здесь'. Пример: <b>Здесь</b> жарко.<br>" +
-                      "<b>Úkraínska (Українська):</b> Пояснення: Прислівник місця, що означає 'тут'. Приклад: <b>Тут</b> гаряче.<br>" +
-                      "<b>Persneska (فارسی):</b> توضیح: قید مکان به معنی «اینجا». مثال: <b>اینجا</b> گرم است."
+        is_exp: "<b>Útskýring:</b> Atviksorð sem vísar til staðsetningar, mjög nálægt þeim sem talar. Samheiti: <i>hérna</i>.<br><b>Dæmi:</b> Það er heitt <b>hér</b>.",
+        translations: "<b>Enska (English):</b> Explanation: Adverb indicating a location very close to the speaker (here). Synonym: hérna. Example: It is hot <b>here</b>.<br>" +
+                      "<b>Pólska (Polski):</b> Objaśnienie: Przysłówek wskazujący miejsce bardzo blisko mówiącego (tutaj). Synonim: hérna. Przykład: Jest <b>tutaj</b> gorąco.<br>" +
+                      "<b>Spænska (Español):</b> Explicación: Adverbio que indica un lugar muy cercano al hablante (aquí). Sinónimo: hérna. Ejemplo: Hace calor <b>aquí</b>.<br>" +
+                      "<b>Víetnamska (Tiếng Việt):</b> Giải thích: Trạng từ chỉ địa điểm rất gần với người nói (ở đây). Từ đồng nghĩa: hérna. Ví dụ: <b>Ở đây</b> rất nóng.<br>" +
+                      "<b>Arabíska (العربية):</b> الشرح: ظرف يشير إلى مكان قريب جداً من المتحدث (هنا). مرادف: hérna. مثال: الجو حار <b>هنا</b>.<br>" +
+                      "<b>Rússneska (Русский):</b> Объяснение: Наречие, указывающее на место, очень близкое к говорящему (здесь). Синоним: hérna. Пример: <b>Здесь</b> жарко.<br>" +
+                      "<b>Úkraínska (Українська):</b> Пояснення: Прислівник, що вказує на місце, дуже близьке до мовця (тут). Синонім: hérna. Приклад: <b>Тут</b> гаряче.<br>" +
+                      "<b>Persneska (فارسی):</b> توضیح: قید مکان که به مکانی بسیار نزدیک به گوینده اشاره دارد (اینجا). مترادف: hérna. مثال: <b>اینجا</b> گرم است.<br>" +
+                      "<b>Tælenska (ไทย):</b> คำอธิบาย: กริยาวิเศษณ์บอกตำแหน่งที่ใกล้ชิดกับผู้พูดมาก (ที่นี่) คำพ้องความหมาย: hérna ตัวอย่าง: <b>ที่นี่</b>อากาศร้อน<br>" +
+                      "<b>Portúgalska (Português):</b> Explicativo: Advérbio que indica um local muito próximo a quem fala (aqui). Sinônimo: hérna. Exemplo: Está quente <b>aqui</b>.<br>" +
+                      "<b>Kínverska (中文):</b> 解释：表示非常靠近说话者位置的副词（这里）。同义词：hérna。 例句：<b>这里</b>很热。<br>" +
+                      "<b>Lettneska (Latviešu):</b> Paskaidrojums: Apstākļa vārds, kas norāda uz vietu ļoti tuvu runātājam (šeit). Sinonīms: hérna. Piemērs: <b>Šeit</b> ir karsts."
     },
     { 
         text: "má", 
         is_exp: "<b>Útskýring:</b> Sagnorðið „að mega“ í nútíð, 1. eða 3. persónu eintölu. Þýðir að hafa leyfi til einhvers.<br><b>Dæmi:</b> <b>Má</b> ég fá vatn?",
-        translations: "<b>Enska (English):</b> Explanation: The verb 'mega' (may / can) indicating permission. Example: <b>May</b> I have some water?<br>" +
-                      "<b>Pólska (Polski):</b> Objaśnienie: Czasownik oznaczający pozwolenie (móc / czy mogę). Przykład: <b>Czy mogę</b> prosić o wodę?<br>" +
-                      "<b>Spænska (Español):</b> Explicación: El verbo que indica permiso (poder). Ejemplo: ¿<b>Puedo</b> tener agua?<br>" +
-                      "<b>Víetnamska (Tiếng Việt):</b> Giải thích: Động từ chỉ sự cho phép (có thể / được). Ví dụ: Tôi <b>có thể</b> xin nước không?<br>" +
-                      "<b>Arabíska (العربية):</b> الشرح: فعل يفيد الإذن (هل يمكنني / يجوز). مثال: <b>هل يمكنني</b> الحصول على ماء؟<br>" +
-                      "<b>Rússneska (Русский):</b> Объяснение: Глагол, выражающий разрешение (можно / могу). Пример: <b>Можно</b> мне воды?<br>" +
-                      "<b>Úkraínska (Українська):</b> Пояснення: Дієслово, що виражає дозвіл (можна / можу). Приклад: <b>Можна</b> мені води?<br>" +
-                      "<b>Persneska (فارسی):</b> توضیح: فعل دلالت بر اجازه داشتن (می‌توانم / آیا اجازه هست). مثال: <b>آیا می‌توانم</b> آب بخورم؟"
+        translations: "<b>Enska (English):</b> Explanation: The verb 'að mega' in present tense. Means to have permission to do something (may / can). Example: <b>May</b> I have some water?<br>" +
+                      "<b>Pólska (Polski):</b> Objaśnienie: Czasownik 'móc / mieć pozwolenie' w czasie teraźniejszym. Oznacza posiadanie pozwolenia na coś. Przykład: <b>Czy mogę</b> prosić o wodę?<br>" +
+                      "<b>Spænska (Español):</b> Explicación: El verbo 'poder' en presente. Significa tener permiso para hacer algo. Ejemplo: ¿<b>Puedo</b> tener agua?<br>" +
+                      "<b>Víetnamska (Tiếng Việt):</b> Giải thích: Động từ 'có thể / được phép' ở thì hiện tại. Nghĩa là có sự cho phép. Ví dụ: Tôi <b>có thể</b> xin nước không?<br>" +
+                      "<b>Arabíska (العربية):</b> الشرح: فعل يفيد الحصول على إذن للقيام بشيء (هل يمكنني / يجوز). مثال: <b>هل يمكنني</b> الحصول على ماء؟<br>" +
+                      "<b>Rússneska (Русский):</b> Объяснение: Глагол 'мочь' (иметь разрешение) в настоящем времени. Пример: <b>Можно</b> мне воды?<br>" +
+                      "<b>Úkraínska (Українська):</b> Пояснення: Дієслово 'могти' (мати дозвіл) у теперішньому часі. Приклад: <b>Можна</b> мені води?<br>" +
+                      "<b>Persneska (فارسی):</b> توضیح: فعل دلالت بر اجازه داشتن در زمان حال (می‌توانم / آیا اجازه هست). مثال: <b>آیا می‌توانم</b> آب بخورم؟<br>" +
+                      "<b>Tælenska (ไทย):</b> คำอธิบาย: กริยาแปลว่า 'อาจจะ / สามารถ' (ได้รับอนุญาต) ในปัจจุบันกาล ตัวอย่าง: <b>ขอ</b>น้ำให้ฉันหน่อยได้ไหม?<br>" +
+                      "<b>Portúgalska (Português):</b> Explicativo: O verbo 'poder' no presente. Significa ter permissão para algo. Exemplo: <b>Posso</b> tomar água?<br>" +
+                      "<b>Kínverska (中文):</b> 解释：表示获得许可的现在时动词（可以/能）。 例句：我<b>可以</b>喝点水吗？<br>" +
+                      "<b>Lettneska (Latviešu):</b> Paskaidrojums: Darbības vārds tagadnē. Nozīmē, ka ir atļauja kaut ko darīt (drīkst). Piemērs: Vai <b>drīkst</b> palūgt ūdeni?"
     },
     { 
         text: "sé", 
-        is_exp: "<b>Útskýring:</b> Sagnorðið „að sjá“ í fyrstu persónu eintölu, framsöguhætti eða viðtengingarhætti.<br><b>Dæmi:</b> Ég <b>sé</b> stóran hund.",
-        translations: "<b>Enska (English):</b> Explanation: The verb 'to see' in the 1st person singular (I see). Example: I <b>see</b> a big dog.<br>" +
-                      "<b>Pólska (Polski):</b> Objaśnienie: Czasownik 'widzieć' w 1. osobie (widzę). Przykład: <b>Widzę</b> dużego psa.<br>" +
-                      "<b>Spænska (Español):</b> Explicación: El verbo 'ver' en primera persona (yo veo). Ejemplo: Yo <b>veo</b> un perro grande.<br>" +
-                      "<b>Víetnamska (Tiếng Việt):</b> Giải thích: Động từ 'nhìn thấy' ở ngôi thứ nhất (tôi thấy). Ví dụ: Tôi <b>thấy</b> một con chó lớn.<br>" +
-                      "<b>Arabíska (العربية):</b> الشرح: الفعل 'يرى' في صيغة المتكلم (أنا أرى). مثال: أنا <b>أرى</b> كلباً كبيراً.<br>" +
-                      "<b>Rússneska (Русский):</b> Объяснение: Глагол 'видеть' в 1-м лице (вижу). Пример: Я <b>вижу</b> большую собаку.<br>" +
-                      "<b>Úkraínska (Українська):</b> Пояснення: Дієслово 'бачити' в 1-й особі (бачу). Приклад: Я <b>бачу</b> великого собаку.<br>" +
-                      "<b>Persneska (فارسی):</b> توضیح: فعل «دیدن» در اول شخص مفرد (می‌بینم). مثال: من یک سگ بزرگ <b>می‌بینم</b>."
+        is_exp: "<b>Útskýring:</b> Getur þýtt tvennt. Sagnorðið „að sjá“ (að horfa á eitthvað) í 1. persónu nútíðar, eða sagnorðið „að vera“ í viðtengingarhætti. Hér er það að sjá.<br><b>Dæmi:</b> Ég <b>sé</b> stóran hund.",
+        translations: "<b>Enska (English):</b> Explanation: Has two meanings. The verb 'to see' (1st person present), or the subjunctive of 'to be'. Here it means 'to see'. Example: I <b>see</b> a big dog.<br>" +
+                      "<b>Pólska (Polski):</b> Objaśnienie: Dwa znaczenia. Czasownik 'widzieć' (1. os. l.p.) lub tryb łączący 'być'. Tutaj oznacza 'widzieć'. Przykład: <b>Widzę</b> dużego psa.<br>" +
+                      "<b>Spænska (Español):</b> Explicación: Tiene dos significados. El verbo 'ver' (1ra persona presente), o el subjuntivo de 'ser/estar'. Aquí significa 'ver'. Ejemplo: Yo <b>veo</b> un perro grande.<br>" +
+                      "<b>Víetnamska (Tiếng Việt):</b> Giải thích: Có hai nghĩa. Động từ 'nhìn thấy' hoặc thể giả định của 'to be'. Ở đây nghĩa là 'nhìn thấy'. Ví dụ: Tôi <b>thấy</b> một con chó lớn.<br>" +
+                      "<b>Arabíska (العربية):</b> الشرح: لها معنيان. الفعل 'يرى' (للمتكلم الحاضر) أو صيغة الشرط من الفعل 'يكون'. هنا تعني 'أرى'. مثال: أنا <b>أرى</b> كلباً كبيراً.<br>" +
+                      "<b>Rússneska (Русский):</b> Объяснение: Два значения. Глагол 'видеть' (1 л. ед.ч.) или сослагательное наклонение 'быть'. Здесь означает 'видеть'. Пример: Я <b>вижу</b> большую собаку.<br>" +
+                      "<b>Úkraínska (Українська):</b> Пояснення: Два значення. Дієслово 'бачити' (1 ос. одн.) або умовний спосіб 'бути'. Тут означає 'бачити'. Приклад: Я <b>бачу</b> великого собаку.<br>" +
+                      "<b>Persneska (فارسی):</b> توضیح: دو معنی دارد. فعل «دیدن» (اول شخص حال) یا وجه التزامی «بودن». در اینجا به معنی دیدن است. مثال: من یک سگ بزرگ <b>می‌بینم</b>.<br>" +
+                      "<b>Tælenska (ไทย):</b> คำอธิบาย: มีสองความหมาย กริยา 'เห็น' (บุรุษที่ 1) หรือรูปสมมติของกริยา 'เป็น/อยู่/คือ' ในที่นี้แปลว่า 'เห็น' ตัวอย่าง: ฉัน<b>เห็น</b>สุนัขตัวใหญ่<br>" +
+                      "<b>Portúgalska (Português):</b> Explicativo: Tem dois significados. O verbo 'ver' (1ª pessoa presente), ou o subjuntivo de 'ser/estar'. Aqui significa 'ver'. Exemplo: Eu <b>vejo</b> um cachorro grande.<br>" +
+                      "<b>Kínverska (中文):</b> 解释：有两个意思。动词“看”（第一人称现在时），或是“是”的虚拟语气。这里意思是“看”。 例句：我<b>看到</b>了一只大狗。<br>" +
+                      "<b>Lettneska (Latviešu):</b> Paskaidrojums: Divas nozīmes. Darbības vārds 'redzēt' (1. pers. tagadnē) vai 'būt' vēlējuma izteiksmē. Šeit tas nozīmē 'redzēt'. Piemērs: Es <b>redzu</b> lielu suni."
     },
     { 
         text: "hans", 
         is_exp: "<b>Útskýring:</b> Eignarfornafn í karlkyni, 3. persónu eintölu. Vísar til þess að maður eða strákur eigi eitthvað.<br><b>Dæmi:</b> Þetta er bíllinn <b>hans</b>.",
-        translations: "<b>Enska (English):</b> Explanation: Possessive pronoun for masculine singular (his). Example: This is <b>his</b> car.<br>" +
-                      "<b>Pólska (Polski):</b> Objaśnienie: Zaimek dzierżawczy dla rodzaju męskiego (jego). Przykład: To jest <b>jego</b> samochód.<br>" +
-                      "<b>Spænska (Español):</b> Explicación: Pronombre posesivo masculino singular (su / de él). Ejemplo: Este es <b>su</b> coche.<br>" +
-                      "<b>Víetnamska (Tiếng Việt):</b> Giải thích: Đại từ sở hữu cho giống đực số ít (của anh ấy). Ví dụ: Đây là ô tô <b>của anh ấy</b>.<br>" +
-                      "<b>Arabíska (العربية):</b> الشرح: ضمير ملكية للمفرد المذكر (خاصته / له). مثال: هذه سيارتـ<b>ـه</b>.<br>" +
-                      "<b>Rússneska (Русский):</b> Объяснение: Притяжательное местоимение мужского рода (его). Пример: Это <b>его</b> машина.<br>" +
-                      "<b>Úkraínska (Українська):</b> Пояснення: Прислівний займенник чоловічого роду (його). Приклад: Це <b>його</b> машина.<br>" +
-                      "<b>Persneska (فارسی):</b> توضیح: ضمیر ملکی برای مذکر (مال او). مثال: این ماشینِ <b>او</b> است."
+        translations: "<b>Enska (English):</b> Explanation: Possessive pronoun in masculine singular (his). Refers to something owned by a man/boy. Example: This is <b>his</b> car.<br>" +
+                      "<b>Pólska (Polski):</b> Objaśnienie: Zaimek dzierżawczy dla rodzaju męskiego (jego). Odnosi się do rzeczy należącej do niego. Przykład: To jest <b>jego</b> samochód.<br>" +
+                      "<b>Spænska (Español):</b> Explicación: Pronombre posesivo masculino singular (su / de él). Se refiere a algo propiedad de un hombre/niño. Ejemplo: Este es <b>su</b> coche.<br>" +
+                      "<b>Víetnamska (Tiếng Việt):</b> Giải thích: Đại từ sở hữu cho giống đực số ít (của anh ấy). Chỉ vật thuộc sở hữu của nam giới. Ví dụ: Đây là ô tô <b>của anh ấy</b>.<br>" +
+                      "<b>Arabíska (العربية):</b> الشرح: ضمير ملكية للمفرد المذكر (خاصته / له). يشير لشيء يملكه رجل أو ولد. مثال: هذه سيارتـ<b>ـه</b>.<br>" +
+                      "<b>Rússneska (Русский):</b> Объяснение: Притяжательное местоимение мужского рода (его). Указывает на принадлежность мужчине/мальчику. Пример: Это <b>его</b> машина.<br>" +
+                      "<b>Úkraínska (Українська):</b> Пояснення: Прислівний займенник чоловічого роду (його). Вказує на приналежність чоловікові/хлопцю. Приклад: Це <b>його</b> машина.<br>" +
+                      "<b>Persneska (فارسی):</b> توضیح: ضمیر ملکی برای مذکر مفرد (مال او). به چیزی اشاره دارد که متعلق به یک مرد/پسر است. مثال: این ماشینِ <b>او</b> است.<br>" +
+                      "<b>Tælenska (ไทย):</b> คำอธิบาย: สรรพนามแสดงความเป็นเจ้าของสำหรับผู้ชายเอกพจน์ (ของเขา) ตัวอย่าง: นี่คือรถ<b>ของเขา</b><br>" +
+                      "<b>Portúgalska (Português):</b> Explicativo: Pronome possessivo no masculino singular (seu / dele). Refere-se a algo de um homem/menino. Exemplo: Este é o carro <b>dele</b>.<br>" +
+                      "<b>Kínverska (中文):</b> 解释：男性单数物主代词（他的）。指代男人或男孩拥有的东西。 例句：这是<b>他的</b>车。<br>" +
+                      "<b>Lettneska (Latviešu):</b> Paskaidrojums: Piederības vietniekvārds vīriešu dzimtē (viņa). Norāda uz vīrieša/zēna īpašumu. Piemērs: Šī ir <b>viņa</b> automašīna."
     },
     { 
         text: "hver", 
-        is_exp: "<b>Útskýring:</b> Spurnarfornafn notað til að spyrja um manneskju (eða manneskjur).<br><b>Dæmi:</b> <b>Hver</b> er þarna?",
-        translations: "<b>Enska (English):</b> Explanation: Question pronoun used to ask about a person (who). Example: <b>Who</b> is there?<br>" +
-                      "<b>Pólska (Polski):</b> Objaśnienie: Zaimek pytający o osobę (kto). Przykład: <b>Kto</b> tam jest?<br>" +
-                      "<b>Spænska (Español):</b> Explicación: Pronombre interrogativo para personas (quién). Ejemplo: ¿<b>Quién</b> está ahí?<br>" +
-                      "<b>Víetnamska (Tiếng Việt):</b> Giải thích: Đại từ nghi vấn dùng để hỏi về người (ai). Ví dụ: <b>Ai</b> ở đó vậy?<br>" +
-                      "<b>Arabíska (العربية):</b> الشرح: ضمير استفهام للسؤال عن شخص (مَن). مثال: <b>مَن</b> هناك؟<br>" +
-                      "<b>Rússneska (Русский):</b> Объяснение: Вопросительное местоимение о человеке (кто). Пример: <b>Кто</b> там?<br>" +
-                      "<b>Úkraínska (Українська):</b> Пояснення: Питальний займенник про людину (хто). Приклад: <b>Хто</b> там?<br>" +
-                      "<b>Persneska (فارسی):</b> توضیح: ضمیر پرسشی برای پرسیدن درباره یک شخص (چه کسی). مثال: <b>چه کسی</b> آنجاست؟"
+        is_exp: "<b>Útskýring:</b> Getur verið spurnarfornafn („hver er þetta?“) eða óákveðið fornafn (að merkja „allir“ eins og í „hver og einn“). Hér er spurt um manneskju.<br><b>Dæmi:</b> <b>Hver</b> er þarna?",
+        translations: "<b>Enska (English):</b> Explanation: Can be a question pronoun (who) or indefinite pronoun (each/every). Here it asks about a person. Example: <b>Who</b> is there?<br>" +
+                      "<b>Pólska (Polski):</b> Objaśnienie: Może być zaimkiem pytającym (kto) lub nieokreślonym (każdy). Tutaj pyta o osobę. Przykład: <b>Kto</b> tam jest?<br>" +
+                      "<b>Spænska (Español):</b> Explicación: Puede ser un pronombre interrogativo (quién) o indefinido (cada/todos). Aquí pregunta por una persona. Ejemplo: ¿<b>Quién</b> está ahí?<br>" +
+                      "<b>Víetnamska (Tiếng Việt):</b> Giải thích: Có thể là đại từ để hỏi (ai) hoặc đại từ bất định (mỗi/mọi). Ở đây dùng để hỏi về một người. Ví dụ: <b>Ai</b> ở đó vậy?<br>" +
+                      "<b>Arabíska (العربية):</b> الشرح: قد يكون ضمير استفهام (مَن) أو نكرة (كل). هنا يستخدم للسؤال عن شخص. مثال: <b>مَن</b> هناك؟<br>" +
+                      "<b>Rússneska (Русский):</b> Объяснение: Может быть вопросительным (кто) или неопределенным местоимением (каждый). Здесь спрашивается о человеке. Пример: <b>Кто</b> там?<br>" +
+                      "<b>Úkraínska (Українська):</b> Пояснення: Може бути питальним (хто) або неозначеним займенником (кожен). Тут запитується про особу. Приклад: <b>Хто</b> там?<br>" +
+                      "<b>Persneska (فارسی):</b> توضیح: می‌تواند ضمیر پرسشی (چه کسی) یا نامعین (هر/همه) باشد. در اینجا درباره یک شخص می‌پرسد. مثال: <b>چه کسی</b> آنجاست؟<br>" +
+                      "<b>Tælenska (ไทย):</b> คำอธิบาย: สามารถเป็นสรรพนามคำถาม (ใคร) หรือสรรพนามไม่ชี้เฉพาะ (แต่ละคน) ในที่นี้คือการถามถึงบุคคล ตัวอย่าง: <b>ใคร</b>อยู่ตรงนั้น?<br>" +
+                      "<b>Portúgalska (Português):</b> Explicativo: Pode ser um pronome interrogativo (quem) ou indefinido (cada/todos). Aqui pergunta sobre uma pessoa. Exemplo: <b>Quem</b> está aí?<br>" +
+                      "<b>Kínverska (中文):</b> 解释：可以是疑问代词（谁）或不定代词（每一个）。这里用来询问人。 例句：<b>谁</b>在那里？<br>" +
+                      "<b>Lettneska (Latviešu):</b> Paskaidrojums: Var būt jautājuma vietniekvārds (kas) vai nenoteiktais (katrs). Šeit tas jautā par personu. Piemērs: <b>Kas</b> tur ir?"
     }
 ];
 
@@ -340,7 +400,7 @@ function findNextUnfinished() {
         }
     }
     document.getElementById('app').innerHTML = `
-        <h1>Æfing 61 - 70 algengustu orðin í íslenskum námsbókum</h1>
+        <h1>Markorð 61 - 70</h1>
         <div class="progress-container"><div id="progress-bar"></div></div>
         <div id="counter"></div>
         <div id="target"></div>
@@ -353,6 +413,9 @@ function findNextUnfinished() {
         <div class="nav-btns">
             <button class="btn" style="background-color: #5f6368;" onclick="prevExercise()">⬅️ Fyrri</button>
             <button class="btn" style="background-color: #5f6368;" onclick="nextExercise()">Næsta ➡️</button>
+        </div>
+        <div class="feedback-note">
+            Þetta er tilraunaútgáfa. Vinsamlegast sendið ábendingar á <a href="mailto:dgu@fb.is">dgu@fb.is</a>
         </div>
     `;
     updateUI();
@@ -372,6 +435,9 @@ function updateUI() {
                 <button id="cert-btn" class="btn" style="background-color: #1a73e8; font-size: 1.5em; padding: 15px 30px; margin-top: 10px;" onclick="downloadCert()">🏆 Sækja viðurkenningarskjal</button>
                 <br><br>
                 <button class="btn" style="background-color: #5f6368;" onclick="location.reload()">🔄 Byrja aftur</button>
+                <div class="feedback-note">
+                    Þetta er tilraunaútgáfa. Vinsamlegast sendið ábendingar á <a href="mailto:dgu@fb.is">dgu@fb.is</a>
+                </div>
             `;
         } else {
             document.getElementById('app').innerHTML = `
@@ -380,6 +446,9 @@ function updateUI() {
                 <p style="font-size: 1.2em;">Þú hefur klárað ${correctCount} af ${exerciseData.length} orðum með 100% árangri.</p>
                 <p style="font-size: 1.1em; color: #555;">Farðu til baka og reyndu aftur við þau orð sem vantaði upp á til að fá skjalið.</p>
                 <button class="btn" style="background-color: #fbbc05; color: #000;" onclick="findNextUnfinished()">➡️ Fara á orð sem vantar</button>
+                <div class="feedback-note">
+                    Þetta er tilraunaútgáfa. Vinsamlegast sendið ábendingar á <a href="mailto:dgu@fb.is">dgu@fb.is</a>
+                </div>
             `;
         }
         return;
@@ -509,7 +578,7 @@ function downloadCert() {
 
     ctx.fillStyle = '#1a73e8';
     ctx.font = 'bold 26px Arial';
-    ctx.fillText('Æfing 61 - 70 algengustu orðin í íslenskum námsbókum', canvas.width / 2, 420);
+    ctx.fillText('Markorð 61 - 70', canvas.width / 2, 420);
     
     ctx.fillStyle = '#34a853';
     ctx.font = 'italic 28px Arial';
